@@ -1,122 +1,728 @@
+//-==============properly workbng UI===============
+
+/*
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+// Import screens
+import 'modules/buyer/BuyerMainInquiryPage.dart';
+import 'modules/buyer/BuyerOfferPage.dart';
+import 'modules/buyer/SendInquiryPage.dart';
+import 'modules/buyer/InquiryReceivedPage.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const PolymartApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class PolymartApp extends StatelessWidget {
+  const PolymartApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter ',
+      title: 'Polymart - Buyer Flow',
+      debugShowCheckedModeBanner: false,
+
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
+        textTheme: GoogleFonts.poppinsTextTheme(),
+        colorSchemeSeed: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+
+      initialRoute: '/buyer-main-inquiry',
+
+      routes: {
+        '/buyer-main-inquiry': (context) => const BuyerMainInquiryPage(),
+
+        // Passing dummy default values; real values will be passed via Navigator.pushNamed
+        '/buyer-offer': (context) => const BuyerOfferPage(
+          selectedGrade: '',
+          selectedType: '',
+        ),
+
+        '/send-inquiry': (context) => const SendInquiryPage(produc'/in}),
+
+        '/inquiry-received': (context) => const InquiryReceivedPage(productNa'/in'',, grade: '',, qty: '',, pricePerKg: '',, subtotal: null,, delivery: null,, total: null,),
+      },
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+*/
+//working with all UI
+/*
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
+// Buyer Screens
+import 'modules/buyer/BuyerMainInquiryPage.dart';
+import 'modules/buyer/buyer_all_inquiries.dart';
+import 'modules/news/market_news_page.dart';
 
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
+void main() {
+  runApp(const PolymartApp());
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
+class PolymartApp extends StatelessWidget {
+  const PolymartApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    return Scaffold(
-      appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+    return MaterialApp(
+      title: 'Polymart - Buyer Flow',
+      debugShowCheckedModeBanner: false,
+
+      theme: ThemeData(
+        useMaterial3: true,
+        textTheme: GoogleFonts.poppinsTextTheme(),
+        colorSchemeSeed: Colors.blue,
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text('You have pushed the button this many times:'),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
+
+      // Buyer Dashboard
+      initialRoute: '/buyer-main-inquiry',
+
+      routes: {
+        // DASHBOARD
+        '/buyer-main-inquiry': (context) => const BuyerMainInquiryPage(
+          selectedGrade: '',
+          selectedType: '',
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+
+        // ALL INQUIRIES
+        '/buyer-all-inquiries': (context) => const BuyerAllInquiries(
+          selectedGrade: '',
+          selectedType: '',
+        ),
+
+        // NEWS
+        '/market-news': (context) => const MarketNewsPage(),
+
+        // PROFILE (TEMP PLACEHOLDER)
+        '/profile': (context) => const Scaffold(
+          body: Center(child: Text("Profile Page")),
+        ),
+      },
     );
   }
 }
+
+ */
+//================old working main with minimal errors
+/*
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+// Screens
+import 'modules/buyer/BuyerMainInquiryPage.dart';
+import 'modules/buyer/BuyerOfferPage.dart';
+import 'modules/buyer/SendInquiryPage.dart';
+import 'modules/buyer/InquiryReceivedPage.dart';
+import 'modules/news/Buyermainpage.dart';
+
+void main() {
+  runApp(const PolymartApp());
+}
+
+class PolymartApp extends StatelessWidget {
+  const PolymartApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Polymart - Buyer Flow',
+      debugShowCheckedModeBanner: false,
+
+      theme: ThemeData(
+        useMaterial3: true,
+        textTheme: GoogleFonts.poppinsTextTheme(),
+        colorSchemeSeed: Colors.blue,
+      ),
+
+      initialRoute: '/buyer-main-inquiry',
+
+      routes: {
+        '/buyer-main-inquiry': (context) => const Buyermainpage(),
+
+        /// Buyer Offer Page (can be navigated from Browse More button)
+        '/buyer-offer': (context) => const BuyerOfferPage(
+          selectedGrade: '',
+          selectedType: '',
+        ),
+
+        '/send-inquiry': (context) {
+          final args =
+          ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
+
+          final product = args?['product'];
+
+          return SendInquiryPage(
+            product: product ?? {
+              "name": "",
+              "grade": "",
+              "price": "",
+              "order": "",
+              "mfi": "",
+              "location": "",
+            },
+          );
+        },
+
+        '/inquiry-received': (context) {
+          final args =
+          ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
+
+          return InquiryReceivedPage(
+            productName: args?['productName'] ?? "",
+            grade: args?['grade'] ?? "",
+            qty: args?['qty'] ?? "",
+            pricePerKg: args?['pricePerKg'] ?? "",
+            subtotal: args?['subtotal'] ?? 0,
+            delivery: args?['delivery'] ?? 0,
+            total: args?['total'] ?? 0,
+          );
+        },
+      },
+    );
+  }
+}
+
+*/
+//====================new main with proper navigation
+/*
+// main.dart
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+// Screens
+import 'modules/buyer/BuyerMainInquiryPage.dart';
+import 'modules/buyer/SendInquiryPage.dart';
+import 'modules/buyer/InquiryReceivedPage.dart';
+
+void main() {
+  runApp(const PolymartApp());
+}
+
+class PolymartApp extends StatelessWidget {
+  const PolymartApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Polymart - Buyer Flow',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        useMaterial3: true,
+        textTheme: GoogleFonts.poppinsTextTheme(),
+        colorSchemeSeed: Colors.blue,
+      ),
+      initialRoute: '/buyer-main-inquiry',
+      routes: {
+        '/buyer-main-inquiry': (context) => const SendInquiryPage(product: {},),
+
+        // send-inquiry builds SendInquiryPage with product from arguments (if any)
+        '/send-inquiry': (context) {
+          final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
+          final product = args?['product'] as Map<String, dynamic>?;
+
+          return SendInquiryPage(
+            product: product ?? {
+              "name": "",
+              "grade": "",
+              "price": "₹ 0 / Kg",
+              "order": "0 MT",
+              "mfi": "0.0",
+              "location": "",
+            },
+          );
+        },
+
+        // inquiry received gets summary args
+        '/inquiry-received': (context) {
+          final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
+
+          return InquiryReceivedPage(
+            productName: args?['productName'] ?? "",
+            grade: args?['grade'] ?? "",
+            qty: args?['qty'] ?? "",
+            pricePerKg: args?['pricePerKg'] ?? "",
+            subtotal: args?['subtotal'] ?? 0,
+            delivery: args?['delivery'] ?? 0,
+            total: args?['total'] ?? 0,
+          );
+        },
+      },
+    );
+  }
+}
+*/
+
+//'''''''''''''''''''''''main code for responsive screens''''''''''''''''''''''''''''''
+/*
+// main.dart
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:polymart_app/utils/core/responsive/responsive_layout.dart';
+
+// Responsive Core
+
+
+// Screens
+import 'modules/buyer/BuyerMainInquiryPage.dart';
+import 'modules/buyer/SendInquiryPage.dart';
+import 'modules/buyer/InquiryReceivedPage.dart';
+
+void main() {
+  runApp(const PolymartApp());
+}
+
+class PolymartApp extends StatelessWidget {
+  const PolymartApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Polymart - Buyer Flow',
+      debugShowCheckedModeBanner: false,
+
+      // ---------------- THEME ----------------
+      theme: ThemeData(
+        useMaterial3: true,
+        textTheme: GoogleFonts.poppinsTextTheme(),
+        colorSchemeSeed: Colors.blue,
+      ),
+
+      // Default route
+      initialRoute: '/buyer-main-inquiry',
+
+      // ---------------- ROUTING ----------------
+      routes: {
+        // ---------------------------------------------------
+        // BUYER MAIN INQUIRY PAGE (Responsive Wrapper)
+        // ---------------------------------------------------
+        '/buyer-main-inquiry': (context) => ResponsiveLayout(
+          small: const BuyerMainInquiryPage(),    // Phones below 360px
+          medium: const BuyerMainInquiryPage(),   // Phones 360–480px
+          large: const BuyerMainInquiryPage(),    // Large phones & tablets
+        ),
+
+        // ---------------------------------------------------
+        // SEND INQUIRY PAGE (Receives product object)
+        // ---------------------------------------------------
+        '/send-inquiry': (context) {
+          // Get arguments passed using Navigator.pushNamed()
+          final args =
+          ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
+
+          final product = args?['product'] as Map<String, dynamic>?;
+
+          return ResponsiveLayout(
+            small: SendInquiryPage(product: product ?? defaultProduct),
+            medium: SendInquiryPage(product: product ?? defaultProduct),
+            large: SendInquiryPage(product: product ?? defaultProduct),
+          );
+        },
+
+        // ---------------------------------------------------
+        // INQUIRY RECEIVED PAGE (Summary Page)
+        // ---------------------------------------------------
+        '/inquiry-received': (context) {
+          final args =
+          ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
+
+          return ResponsiveLayout(
+            small: InquiryReceivedPage(
+              productName: args?['productName'] ?? "",
+              grade: args?['grade'] ?? "",
+              qty: args?['qty'] ?? "",
+              pricePerKg: args?['pricePerKg'] ?? "",
+              subtotal: args?['subtotal'] ?? 0,
+              delivery: args?['delivery'] ?? 0,
+              total: args?['total'] ?? 0,
+            ),
+            medium: InquiryReceivedPage(
+              productName: args?['productName'] ?? "",
+              grade: args?['grade'] ?? "",
+              qty: args?['qty'] ?? "",
+              pricePerKg: args?['pricePerKg'] ?? "",
+              subtotal: args?['subtotal'] ?? 0,
+              delivery: args?['delivery'] ?? 0,
+              total: args?['total'] ?? 0,
+            ),
+            large: InquiryReceivedPage(
+              productName: args?['productName'] ?? "",
+              grade: args?['grade'] ?? "",
+              qty: args?['qty'] ?? "",
+              pricePerKg: args?['pricePerKg'] ?? "",
+              subtotal: args?['subtotal'] ?? 0,
+              delivery: args?['delivery'] ?? 0,
+              total: args?['total'] ?? 0,
+            ),
+          );
+        },
+      },
+    );
+  }
+}
+/*
+// ---------------- DEFAULT EMPTY PRODUCT ----------------
+final Map<String, dynamic> defaultProduct = {
+  "name": "",
+  "grade": "",
+  "price": "₹ 0 / Kg",
+  "order": "0 MT",
+  "mfi": "0.0",
+  "location": "",
+};
+
+ */
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+// Screens
+import 'modules/profile/ProfilePages.dart';
+
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(const PolymartApp());
+}
+
+class PolymartApp extends StatelessWidget {
+  const PolymartApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ScreenUtilInit(
+      designSize: const Size(375, 812), // Standard mobile base (iPhone X)
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (context, child) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Polymart - UI Testing',
+
+          theme: ThemeData(
+            useMaterial3: true,
+            textTheme: GoogleFonts.poppinsTextTheme(),
+          ),
+
+          home: const ProfilePages(), // 👈 your test page
+        );
+      },
+    );
+  }
+}
+
+ */
+//=================
+/*
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+// ================= IMPORT PAGES =================
+
+// Buyer
+import 'modules/buyer/BuyerMainInquiryPage.dart';
+import 'modules/buyer/buyer_all_inquiries.dart';
+import 'modules/buyer/BuyerOfferPage.dart';
+import 'modules/buyer/SendInquiryPage.dart';
+import 'modules/buyer/InquiryReceivedPage.dart';
+
+// News
+import 'modules/news/market_news_page.dart';
+
+// Profile
+import 'modules/profile/ProfilePages.dart';
+
+void main() {
+  runApp(const PolymartApp());
+}
+
+class PolymartApp extends StatelessWidget {
+  const PolymartApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Polymart',
+      debugShowCheckedModeBanner: false,
+
+      // ================= THEME =================
+      theme: ThemeData(
+        useMaterial3: true,
+        textTheme: GoogleFonts.poppinsTextTheme(),
+        colorSchemeSeed: Colors.blue,
+      ),
+
+      // ================= START PAGE =================
+      initialRoute: '/buyer-dashboard',
+
+      // ================= ROUTES =================
+      routes: {
+        // ---------------- DASHBOARD ----------------
+        '/buyer-dashboard': (context) => const BuyerMainInquiryPage(
+          selectedGrade: '',
+          selectedType: '',
+        ),
+
+        // ---------------- ALL INQUIRIES ----------------
+        '/buyer-all-inquiries': (context) => const BuyerAllInquiries(
+          selectedGrade: '',
+          selectedType: '',
+        ),
+
+        // ---------------- BUYER OFFER ----------------
+        '/buyer-offer': (context) => const BuyerOfferPage(
+          selectedGrade: '',
+          selectedType: '',
+        ),
+
+        // ---------------- SEND INQUIRY ----------------
+        '/send-inquiry': (context) {
+          final args =
+          ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
+
+          return SendInquiryPage(
+            product: args?['product'] ??
+                {
+                  "name": "",
+                  "grade": "",
+                  "price": "₹ 0 / Kg",
+                  "order": "0 MT",
+                  "mfi": "0.0",
+                  "location": "",
+                },
+          );
+        },
+
+        // ---------------- INQUIRY RECEIVED ----------------
+        '/inquiry-received': (context) {
+          final args =
+          ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
+
+          return InquiryReceivedPage(
+            productName: args?['productName'] ?? "",
+            grade: args?['grade'] ?? "",
+            qty: args?['qty'] ?? "",
+            pricePerKg: args?['pricePerKg'] ?? "",
+            subtotal: args?['subtotal'] ?? 0,
+            delivery: args?['delivery'] ?? 0,
+            total: args?['total'] ?? 0,
+          );
+        },
+
+        // ---------------- MARKET NEWS ----------------
+        '/market-news': (context) => const MarketNewsPage(),
+
+        // ---------------- PROFILE ----------------
+        '/profile': (context) => const ProfilePages(),
+      },
+    );
+  }
+}
+
+ */
+//--------------------------------proper working all navigation main=======================
+
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+// ================= BUYER =================
+import 'modules/buyer/BuyerMainInquiryPage.dart';
+import 'modules/buyer/buyer_all_inquiries.dart';
+import 'modules/buyer/BuyerOfferPage.dart';
+import 'modules/buyer/SendInquiryPage.dart';
+import 'modules/buyer/InquiryReceivedPage.dart';
+
+// ================= NEWS =================
+import 'modules/news/DetailedMarketNewsPage.dart';
+import 'modules/news/market_news_page.dart';
+
+
+// ================= PROFILE =================
+import 'modules/profile/ProfilePages.dart';
+
+void main() {
+  runApp(const PolymartApp());
+}
+
+class PolymartApp extends StatelessWidget {
+  const PolymartApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Polymart',
+      debugShowCheckedModeBanner: false,
+
+      theme: ThemeData(
+        useMaterial3: true,
+        textTheme: GoogleFonts.poppinsTextTheme(),
+        colorSchemeSeed: Colors.blue,
+      ),
+
+      // 🔥 SINGLE ENTRY POINT
+      home: const BuyerMainInquiryPage(
+        selectedGrade: '',
+        selectedType: '',
+      ),
+
+      // ================= ROUTES =================
+      routes: {
+        '/buyer-main': (context) => const BuyerMainInquiryPage(
+          selectedGrade: '',
+          selectedType: '',
+        ),
+
+        '/buyer-all-inquiries': (context) =>
+        const BuyerAllInquiries(selectedGrade: '', selectedType: ''),
+
+        '/market-news': (context) => const MarketNewsPage(),
+
+        '/profile': (context) => const ProfilePages(),
+
+        // ---------------- SEND INQUIRY ----------------
+        '/send-inquiry': (context) {
+          final args =
+          ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
+
+          return SendInquiryPage(
+            product: args?['product'] ??
+                {
+                  "name": "",
+                  "grade": "",
+                  "price": "₹ 0 / Kg",
+                  "order": "0 MT",
+                  "mfi": "0.0",
+                  "location": "",
+                },
+          );
+        },
+
+        // ---------------- INQUIRY RECEIVED ----------------
+        '/inquiry-received': (context) {
+          final args =
+          ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
+
+          return InquiryReceivedPage(
+            productName: args?['productName'] ?? "",
+            grade: args?['grade'] ?? "",
+            qty: args?['qty'] ?? "",
+            pricePerKg: args?['pricePerKg'] ?? "",
+            subtotal: args?['subtotal'] ?? 0,
+            delivery: args?['delivery'] ?? 0,
+            total: args?['total'] ?? 0,
+          );
+        },
+
+        // ---------------- NEWS DETAIL ----------------
+        '/news-detail': (context) {
+          final args =
+          ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+
+          return DetailedMarketNewsPage(
+            title: args['title'],
+            image: args['image'],
+            description: args['description'],
+            source: args['source'],
+            date: args['date'],
+            imageUrl: args['imageUrl'],
+          );
+        },
+      },
+    );
+  }
+}
+
+
+
+//======================================= DATA ACCESS FROM DB============================
+/*
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+// ================= BUYER =================
+import 'modules/buyer/BuyerMainInquiryPage.dart';
+import 'modules/buyer/buyer_all_inquiries.dart';
+import 'modules/buyer/BuyerOfferPage.dart';
+import 'modules/buyer/SendInquiryPage.dart';
+import 'modules/buyer/InquiryReceivedPage.dart';
+
+// ================= NEWS =================
+import 'modules/news/DetailedMarketNewsPage.dart';
+import 'modules/news/market_news_page.dart';
+
+// ================= PROFILE =================
+import 'modules/profile/ProfilePages.dart';
+
+void main() {
+  runApp(const PolymartApp());
+}
+
+class PolymartApp extends StatelessWidget {
+  const PolymartApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Polymart',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        useMaterial3: true,
+        textTheme: GoogleFonts.poppinsTextTheme(),
+        colorSchemeSeed: Colors.blue,
+      ),
+
+      // 🔥 SINGLE ENTRY POINT
+      home: const BuyerMainInquiryPage(
+        selectedGrade: '',
+        selectedType: '',
+      ),
+
+      // ================= ROUTES =================
+      routes: {
+        '/buyer-main-inquiry': (context) => const BuyerMainInquiryPage(
+          selectedGrade: '',
+          selectedType: '',
+        ),
+
+        '/buyer-all-inquiries': (context) =>
+        const BuyerAllInquiries(selectedGrade: '', selectedType: ''),
+
+        '/market-news': (context) => const MarketNewsPage(),
+
+        '/profile': (context) => const ProfilePages(),
+
+        // ---------------- SEND INQUIRY ----------------
+        '/send-inquiry': (context) {
+          final args =
+          ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
+
+          return SendInquiryPage(
+            product: args?['product'],
+          );
+        },
+
+        // ---------------- INQUIRY RECEIVED Page------------
+Page    '/inquiry-rPageved': (cPagext) => conPagenquiryReceivedPage(productNaPagenull,, grade: null,, qty: null,, pricePerKg: null,, subtotal: null,, delivery: null,, total: null,),
+
+        // ---------------- NEWS DETAIL ----------------
+        '/news-detail': (context) {
+          final args =
+          ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+
+          return DetailedMarketNewsPage(
+            title: args['title'],
+            image: args['image'],
+            description: args['description'],
+            source: args['source'],
+            date: args['date'],
+            imageUrl: args['imageUrl'],
+          );
+        },
+      },
+    );
+  }
+}
+
+ */
